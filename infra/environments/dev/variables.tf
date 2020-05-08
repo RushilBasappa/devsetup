@@ -1,17 +1,19 @@
-variable "secret_file_path" {}
+variable "secret_file_path" {
+  type = string
+}
 
 variable "cluster_name" {
-  default = "microservices"
+  type = string
 }
 
 variable "project_id" {
-  default = "groovy-student-275113"
+  type = string
 }
 
 variable "region" {
-  default = "us-central1"
+  type = string
 }
 
 variable "zone" {
-  default = "us-central1-c"
+  type = string
 }

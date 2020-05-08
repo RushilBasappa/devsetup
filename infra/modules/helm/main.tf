@@ -1,9 +1,8 @@
 provider "kubernetes" {
-  version = ">= 1.4.0"
+  # version = "~>1.11"
 }
 
 resource "kubernetes_service_account" "tiller" {
-  depends_on = [google_container_cluster.cluster]
   metadata {
     name      = "terraform-tiller"
     namespace = "kube-system"
@@ -12,7 +11,7 @@ resource "kubernetes_service_account" "tiller" {
 }
 
 resource "kubernetes_cluster_role_binding" "tiller" {
-  depends_on = [google_container_cluster.cluster]
+
   metadata {
     name = "terraform-tiller"
   }
@@ -34,8 +33,9 @@ provider "helm" {
   namespace       = kubernetes_service_account.tiller.metadata.0.namespace
 }
 
-resource "helm_release" "jenkins" {
-  name      = "jenkins"
-  chart     = "stable/jenkins"
-  namespace = "jenkins"
-}
+
+# resource "helm_release" "jenkins" {
+#   name      = "jenkins"
+#   chart     = "stable/jenkins"
+#   namespace = "jenkins"
+# }

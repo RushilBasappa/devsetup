@@ -7,10 +7,18 @@ provider "google" {
   zone        = var.zone
 }
 
-module "micro_cluster" {
+module "create_cluster" {
   source = "../../modules/gke"
 
   cluster_name = var.cluster_name
   project_id   = var.project_id
   location     = var.zone
+}
+
+module "setup_helm" {
+  source = "../../modules/helm"
+
+  dependency = [
+    module.create_cluster.status
+  ]
 }
