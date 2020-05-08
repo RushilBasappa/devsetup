@@ -9,7 +9,3 @@ output "gcp_cluster_endpoint" {
 output "status" {
   value = "done"
 }
-
-# output "gcp_ssh_command" {
-#   value = "ssh ${var.linux_admin_username}@${google_container_cluster.cluster.endpoint}"
-# }

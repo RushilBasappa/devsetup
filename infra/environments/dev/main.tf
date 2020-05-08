@@ -22,3 +22,14 @@ module "setup_helm" {
     module.create_cluster.status
   ]
 }
+
+module "setup_jenkins" {
+  source = "../../modules/jenkins"
+
+  app_name  = "jenkins"
+  namespace = "jenkins"
+
+  dependency = [
+    module.setup_helm.status
+  ]
+}

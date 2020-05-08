@@ -6,3 +6,6 @@ output "tiller_clusterrole_binding" {
   value = kubernetes_cluster_role_binding.tiller.metadata[0].name
 }
 
+output "status" {
+  value = "done"
+}
