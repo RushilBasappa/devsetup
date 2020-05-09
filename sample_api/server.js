@@ -19,7 +19,7 @@ const users = {
 
 // App
 const app = express();
-app.get('/users', (req, res) => {
+app.get('/', (req, res) => {
   res.send(Object.values(users));
 });
 
