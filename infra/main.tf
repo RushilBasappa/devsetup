@@ -1,3 +1,7 @@
+terraform {
+  required_version = ">= 0.12.24"
+}
+
 module "dev" {
   source = "./environments/dev"
 

@@ -7,6 +7,14 @@ provider "google" {
   zone        = var.zone
 }
 
+provider "helm" {
+  version = "~> 1.2"
+}
+
+provider "kubernetes" {
+  version = "~> 1.11"
+}
+
 module "create_cluster" {
   source = "../../modules/gke"
 
@@ -15,21 +23,21 @@ module "create_cluster" {
   location     = var.zone
 }
 
-module "setup_helm" {
-  source = "../../modules/helm"
+resource "kubernetes_namespace" "jenkins" {
+  depends_on = [module.create_cluster]
+  metadata {
+    name = "jenkins"
+  }
+}
+
+
+module "setup_jenkins" {
+  source = "../../modules/helm/charts/jenkins"
+
+  app_name  = "jenkins"
+  namespace = kubernetes_namespace.jenkins.metadata.0.name
 
   dependency = [
     module.create_cluster.status
-  ]
-}
-
-module "setup_jenkins" {
-  source = "../../modules/jenkins"
-
-  app_name  = "jenkins"
-  namespace = "jenkins"
-
-  dependency = [
-    module.setup_helm.status
   ]
 }
