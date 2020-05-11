@@ -1,18 +1,22 @@
 def label = "worker-${UUID.randomUUID().toString()}"
 
-podTemplate(label: label, containers: [
-  containerTemplate(name: 'kubectl', image: 'lachlanevenson/k8s-kubectl:v1.8.8', command: 'cat', ttyEnabled: true),
-  containerTemplate(name: 'helm', image: 'lachlanevenson/k8s-helm:latest', command: 'cat', ttyEnabled: true)
-]) {
+podTemplate(
+    label: label, 
+    containers: [
+        containerTemplate(name: 'busybox', image: 'busybox', ttyEnabled: true, command: 'cat'),
+        containerTemplate(name: 'kubectl', image: 'lachlanevenson/k8s-kubectl:v1.8.8', ttyEnabled: true, command: 'cat')
+    ], 
+    volumes: [configMapVolume(mountPath: '/root/.kube', configMapName: 'kubeconfig')]
+) {
     node(label) {
-        stage('Run kubectl') {
-            container('kubectl') {
-                sh "kubectl get pods"
+        stage('Get Host'){
+            container('busybox') {
+                sh "hostname"
             }
         }
-        stage('Run helm') {
-            container('helm') {
-                sh "helm list"
+        stage('Get Pods'){
+            container('kubectl') {
+                sh "kubectl get pods"
             }
         }
     }

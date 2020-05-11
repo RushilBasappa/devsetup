@@ -3,8 +3,7 @@ resource "helm_release" "jenkins" {
   chart     = "stable/jenkins"
   namespace = var.namespace
 
-  set {
-    name  = "master.serviceType"
-    value = "LoadBalancer"
-  }
+  values = [
+    "${file("${path.module}/values.yaml")}"
+  ]
 }
