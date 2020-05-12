@@ -9,7 +9,7 @@ const HOST = '0.0.0.0';
 const users = {
   1: {
     id: "1",
-    username: "Robin Wieruch",
+    username: "Rushil Basappa",
   },
   2: {
     id: "2",
@@ -19,6 +19,8 @@ const users = {
 
 // App
 const app = express();
+app.use(cors())
+
 app.get('/', (req, res) => {
   res.send(Object.values(users));
 });
