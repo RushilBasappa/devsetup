@@ -1,6 +1,7 @@
 'use strict';
 
 const express = require('express');
+const morgan = require('morgan')
 
 // Constants
 const PORT = 8080;
@@ -19,8 +20,6 @@ const users = {
 
 var allowCrossDomain = function(req, res, next) {
     res.header('Access-Control-Allow-Origin', "*");
-    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
-    res.header('Access-Control-Allow-Headers', 'Content-Type');
     next();
 }
 
@@ -28,6 +27,7 @@ var allowCrossDomain = function(req, res, next) {
 const app = express();
 
 app.use(allowCrossDomain);
+app.use(morgan('tiny'))
 
 app.get('/', (req, res) => {
   res.send(Object.values(users));
