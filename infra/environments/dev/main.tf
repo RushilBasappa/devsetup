@@ -30,17 +30,6 @@ resource "kubernetes_namespace" "jenkins" {
   }
 }
 
-# module "setup_drone" {
-#   source = "../../modules/helm/charts/drone"
-
-#   app_name  = "drone"
-#   namespace = kubernetes_namespace.drone.metadata.0.name
-
-#   dependency = [
-#     module.create_cluster.status
-#   ]
-# }
-
 module "setup_jenkins" {
   source = "../../modules/helm/charts/jenkins"
 

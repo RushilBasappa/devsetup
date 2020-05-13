@@ -9,7 +9,7 @@ resource "helm_release" "jenkins" {
 }
 
 module "create_service_account" {
-  source = "../../../serviceaccount"
+  source = "../../../gke/serviceaccount"
 
   project_id = var.project_id
 }

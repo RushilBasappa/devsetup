@@ -5,7 +5,7 @@ master:
     - workflow-job:2.39
     - command-launcher:1.4
     - workflow-aggregator:2.6
-    - credentials-binding:1.21
+    - credentials-binding:1.23
     - git:4.2.2
     - configuration-as-code:1.40
     - jdk-tool:1.4
