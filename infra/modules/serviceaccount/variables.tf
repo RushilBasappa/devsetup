@@ -1,15 +1,3 @@
-variable "dependency" {
-  type = list
-}
-
-variable "app_name" {
-  type = string
-}
-
-variable "namespace" {
-  type = string
-}
-
 variable "project_id" {
   type        = string
   description = "Project ID"

@@ -44,8 +44,9 @@ resource "kubernetes_namespace" "jenkins" {
 module "setup_jenkins" {
   source = "../../modules/helm/charts/jenkins"
 
-  app_name  = "jenkins"
-  namespace = kubernetes_namespace.jenkins.metadata.0.name
+  project_id = var.project_id
+  app_name   = "jenkins"
+  namespace  = kubernetes_namespace.jenkins.metadata.0.name
 
   dependency = [
     module.create_cluster.status
