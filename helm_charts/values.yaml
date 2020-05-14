@@ -1,0 +1,16 @@
+sampleapi:
+  replicaCount: 1
+
+  image:
+    repository: "gcr.io/groovy-student-275113/users"
+    pullPolicy: IfNotPresent
+    tag: "2"
+
+  serviceAccount:
+    create: true
+    annotations: {}
+    name: ""
+
+  service:
+    type: ClusterIP
+    port: 8080

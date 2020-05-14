@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: sampleapi
+  name: sampleapi
+  namespace: sampleapi
+spec:
+  ports:
+  - port: {{ .Values.sampleapi.service.port }}
+    protocol: TCP
+    targetPort: {{ .Values.sampleapi.service.port }}
+  selector:
+    app: sampleapi
+  sessionAffinity: None
+  type: ClusterIP

@@ -1,0 +1,23 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    app: sampleapi
+  name: sampleapi
+  namespace: sampleapi
+spec:
+  replicas: {{ .Values.sampleapi.replicaCount }}
+  selector:
+    matchLabels:
+      app: sampleapi
+  template:
+    metadata:
+      labels:
+        app: sampleapi
+    spec:
+      containers:
+      - image: {{ .Values.sampleapi.image.repository }}:{{ .Values.sampleapi.image.tag }}
+        imagePullPolicy: {{ .Values.sampleapi.image.pullPolicy }}
+        name: users
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
