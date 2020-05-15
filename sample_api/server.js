@@ -22,7 +22,7 @@ const users = {
   },
   4: {
     id: "4",
-    username: "Ravi Bhim"
+    username: "Ravi Bhi"
   }
 };
 
